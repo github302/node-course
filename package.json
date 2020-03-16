@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint **/*.js",
-    "start": "node index.js --time 1 --message xiaoshuaishuai111",
+    "command": "node index.js --time 1 --message xiaoshuaishuai111",
+    "server": "NODE_ENV=production nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,9 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^5.0.0",
+    "express": "^4.17.1",
+    "hbs": "^4.1.0",
     "ora": "^4.0.3"
   },
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
   }
 }
