@@ -1,7 +1,8 @@
 const express = require('express');
+const path = require('path');
 const loggingMiddleware = require('./middleware/logging');
-const indexRouter = require('./routes/index');
-const apiRouter = require('./routes/api');
+// const indexRouter = require('./routes/index');
+// const apiRouter = require('./routes/api');
 
 const hostname = 'localhost';
 const port = 3000;
@@ -11,11 +12,13 @@ app.set('view engine', 'hbs');
 
 //  全局中间件
 app.use(loggingMiddleware);
-app.use(express.static('public'));
+
+// 要输入完整地址才行http://localhost:3000/static/css/style.css
+app.use('/static', express.static(path.resolve(__dirname, './public')));
 
 // Router也可以作为中间价加入到app中
-app.use('/', indexRouter);
-app.use('/api', apiRouter);
+// app.use('/', indexRouter);
+// app.use('/api', apiRouter);
 
 app.get('/broken', (req, res) => {
     throw new Error('error');
@@ -25,13 +28,13 @@ app.get('/api/test', (req, res) => {
     res.json({name: 'xiaoshuaitest', website: 'http://localhost:3000/'});
 })
 
-// app.get('/', (req, res) => {
-//     // res.send('Hello xiaoshuai');
-//     res.render('index');
-// })
-// app.get('/contact', (req, res) => {
-//     res.render('contact');
-// })
+app.get('/', (req, res) => {
+    // res.send('Hello xiaoshuai');
+    res.render('index');
+})
+app.get('/contact', (req, res) => {
+    res.render('contact');
+})
 
 app.use('*', (req, res) =>  {
     res.status(404).render('404', {url: req.originalUrl });

@@ -1,2 +1,2 @@
 ### node 版本
-node 8
+node 10
